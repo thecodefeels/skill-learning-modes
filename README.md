@@ -30,7 +30,7 @@ When triggered, the skill presents a menu of 10 learning modes and runs a fully 
 Clone this repo directly into the Claude Code skills directory:
 
 ```bash
-git clone https://github.com/mrvn/skill-learning-modes ~/.claude/skills/learning-modes
+git clone https://github.com/thecodefeels/skill-learning-modes ~/.claude/skills/learning-modes
 ```
 
 That's it. Claude Code discovers skills by directory presence — no config file changes needed.
