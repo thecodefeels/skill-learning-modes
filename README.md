@@ -1,10 +1,21 @@
 # skill-learning-modes
 
-A Claude Code skill that turns any AI session into an interactive learning coach. It implements 10 evidence-based learning modes grounded in cognitive science — each one a distinct coaching style the user picks before a session begins.
+A Claude Code skill that turns any AI session into an interactive learning coach. It provides 10 evidence-based learning modes grounded in cognitive science, each one a distinct coaching style the user picks before a session begins.
+
+This repo is meant to be dropped into a Claude Code skills directory and used immediately. There is no build step, no setup script, and no hidden configuration.
 
 ## What it does
 
 When triggered, the skill presents a menu of 10 learning modes and runs a fully interactive session in the chosen mode. Sessions are conversational: the AI waits for responses, adapts to the user's level, and ends with a concrete takeaway or summary.
+
+## Why it exists
+
+Most AI teaching experiences default to explanation mode. This skill pushes the session into deliberate practice instead:
+
+- Socratic questioning instead of direct answers
+- active recall instead of passive reading
+- interleaving instead of blocked drills
+- mental models, analogies, and visuals instead of surface summaries
 
 ## The 10 modes
 
@@ -34,6 +45,15 @@ git clone https://github.com/thecodefeels/skill-learning-modes ~/.claude/skills/
 ```
 
 That's it. Claude Code discovers skills by directory presence — no config file changes needed.
+
+## What's in the repo
+
+| File | Purpose |
+|------|---------|
+| `SKILL.md` | Main skill definition Claude Code loads |
+| `learning-modes.skill` | Original packaged distribution artifact |
+| `README.md` | Project overview, install, and usage |
+| `LICENSE` | MIT license for public use and redistribution |
 
 ## Verify installation
 
@@ -66,9 +86,8 @@ After the menu appears, pick a mode by number or name, then provide a topic.
 Say "switch modes" or "show menu" at any point. The skill will re-present the menu and start fresh with the new mode.
 
 ## File reference
+The source of truth is [`SKILL.md`](./SKILL.md). The packaged [`learning-modes.skill`](./learning-modes.skill) file is included for compatibility with existing skill-sharing workflows.
 
-| File | Purpose |
-|------|---------|
-| `SKILL.md` | The skill definition loaded by Claude Code — full mode instructions and session logic |
-| `learning-modes.skill` | Original packaged distribution artifact |
-| `README.md` | This file |
+## License
+
+MIT. See [`LICENSE`](./LICENSE).
