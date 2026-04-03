@@ -1,10 +1,12 @@
-# skill-learning-modes
+# Claude Skill Learning Modes
 
 A Claude Code skill that turns any AI session into an interactive learning coach. It provides 10 evidence-based learning modes grounded in cognitive science, each one a distinct coaching style the user picks before a session begins.
 
 This repo is meant to be dropped into a Claude Code skills directory and used immediately. There is no build step, no setup script, and no hidden configuration.
 
 The only file Claude Code needs is `SKILL.md`.
+
+This repository targets Claude Code's skill system. Claude Desktop can connect to Claude Code through MCP, but that is a separate integration and does not load this `SKILL.md` file as a native desktop skill.
 
 ## What it does
 
