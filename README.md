@@ -2,14 +2,14 @@
 
 An interactive learning coach for AI coding-agent environments. It turns a normal "teach me about X" request into a guided practice session instead of a passive explanation.
 
-This repo ships a behavior spec, not a runnable app. The main artifact is [`SKILL.md`](./SKILL.md): a portable instruction file your coding agent can inspect and implement in the environment you already use.
+This repo ships a behavior spec, not a runnable app. The main artifact is [`SKILL.md`](./SKILL.md): a portable instruction file your coding agent can inspect and install or adapt using the native mechanism that fits your tool best.
 
 The product is host-agnostic by design:
 - **Claude Code** can use [`SKILL.md`](./SKILL.md) directly as a skill definition.
-- **OpenAI Codex** can use the same canonical behavior by porting [`SKILL.md`](./SKILL.md) into the repo or project instruction layer.
-- **OpenCode** can use the same canonical behavior by porting [`SKILL.md`](./SKILL.md) into its equivalent instruction or agent file.
+- **OpenAI Codex** can install it as a global skill or adapt it into the instruction layer that fits the workspace.
+- **OpenCode** can port the same behavior into its equivalent instruction or agent file.
 
-The goal is not host-specific packaging. The goal is one consistent learning experience across hosts, whether the behavior is loaded directly or ported by an agent into repo instructions, an agent file, or another prompt layer.
+The goal is not host-specific packaging. The goal is one consistent learning experience across hosts, with the agent itself figuring out the right native install path.
 
 ## What it does
 
@@ -55,27 +55,30 @@ These modes are grounded in plain-language learning principles:
 | 7 | **Analogy Bridge Tutor** | Mapping new concepts onto familiar domains | The topic feels abstract and you need a conceptual foothold |
 | 8 | **Simplified Learning Strategist** | Beginner-friendly, step-by-step scaffolding | You want the topic rebuilt from simple language upward |
 
-## Use with your agent
+## Install with your agent
 
-The normal way to use this repo now is not manual installation. It is:
+The preferred workflow is simple:
 
 1. Give your coding agent this repo URL.
 2. Tell it to use [`SKILL.md`](./SKILL.md) as the canonical behavior spec.
-3. Ask it to implement the behavior in whatever instruction layer your current tool uses.
+3. Ask it to install or adapt the skill using the mechanism that fits the current tool best.
 
 Copy-paste prompt:
 
 ```text
 Use https://github.com/thecodefeels/skill-learning-modes as the canonical behavior spec.
-Implement Learning Modes in this workspace using the instruction mechanism that fits this tool best.
+Install Learning Modes using the native mechanism that fits this tool best.
 Preserve the trigger boundary, the 8-mode menu, the pacing rules, and the mode behaviors from SKILL.md.
 Do not turn it into a runnable app. Treat it as a portable behavior layer.
+If this tool supports global skills, prefer a global install. Otherwise adapt it into the appropriate local instruction layer.
 ```
 
-If you want, your agent can also adapt the behavior for one tool without changing the core learning experience:
+In practice, that means your agent should decide whether this belongs in a global skills directory, a repo-level instruction file, or another native skill mechanism.
 
-- Claude Code: load [`SKILL.md`](./SKILL.md) directly or port it into a local skill setup.
-- OpenAI Codex: adapt [`SKILL.md`](./SKILL.md) into `AGENTS.md` or the repo instruction layer.
+Examples:
+
+- Claude Code: load [`SKILL.md`](./SKILL.md) directly or install it into the local skills setup.
+- OpenAI Codex: prefer a global skill install when supported, otherwise adapt it into `AGENTS.md` or the repo instruction layer.
 - OpenCode: port [`SKILL.md`](./SKILL.md) into the agent or instruction file your setup already uses.
 
 ### What should stay consistent
@@ -92,6 +95,7 @@ The behavior should stay the same across hosts:
 - Do not remove the mode chooser.
 - Do not broaden the trigger so far that it hijacks normal task requests.
 - Do not create host-specific variants with different learning behavior unless you intentionally want a fork.
+- Do not require the human to know the exact install path if the agent can infer it safely.
 
 ## First 60 seconds
 
