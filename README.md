@@ -55,16 +55,6 @@ These modes are grounded in plain-language learning principles:
 | 7 | **Analogy Bridge Tutor** | Mapping new concepts onto familiar domains | The topic feels abstract and you need a conceptual foothold |
 | 8 | **Simplified Learning Strategist** | Beginner-friendly, step-by-step scaffolding | You want the topic rebuilt from simple language upward |
 
-## What changed in v2
-
-This version intentionally reduced the menu from 10 modes to 8.
-
-The dropped top-level modes were merged into stronger retained modes:
-- **Why-How Interrogator** is now part of **Socratic Drillmaster** as a deeper probing style
-- **Progressive Recall Mentor** is now part of **Active Recall Generator** as an escalation pattern for recall practice
-
-The result is a smaller menu with clearer differentiation.
-
 ## Use with your agent
 
 The normal way to use this repo now is not manual installation. It is:
