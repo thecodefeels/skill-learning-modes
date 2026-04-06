@@ -2,14 +2,14 @@
 
 An interactive learning coach for AI coding-agent environments. It turns a normal "teach me about X" request into a guided practice session instead of a passive explanation.
 
-This repo ships a behavior spec, not a runnable app. The main artifact is [`SKILL.md`](./SKILL.md): a portable instruction file you can load directly in hosts that support it or adapt into a host's instruction layer.
+This repo ships a behavior spec, not a runnable app. The main artifact is [`SKILL.md`](./SKILL.md): a portable instruction file your coding agent can inspect and implement in the environment you already use.
 
 The product is host-agnostic by design:
 - **Claude Code** can use [`SKILL.md`](./SKILL.md) directly as a skill definition.
 - **OpenAI Codex** can use the same canonical behavior by porting [`SKILL.md`](./SKILL.md) into the repo or project instruction layer.
 - **OpenCode** can use the same canonical behavior by porting [`SKILL.md`](./SKILL.md) into its equivalent instruction or agent file.
 
-The goal is not host-specific packaging. The goal is one consistent learning experience across hosts.
+The goal is not host-specific packaging. The goal is one consistent learning experience across hosts, whether the behavior is loaded directly or ported by an agent into repo instructions, an agent file, or another prompt layer.
 
 ## What it does
 
@@ -65,34 +65,28 @@ The dropped top-level modes were merged into stronger retained modes:
 
 The result is a smaller menu with clearer differentiation.
 
-## Quick start by host
+## Use with your agent
 
-### Claude Code
+The normal way to use this repo now is not manual installation. It is:
 
-If you use Claude Code skills directly, clone this repo into your skills directory:
+1. Give your coding agent this repo URL.
+2. Tell it to use [`SKILL.md`](./SKILL.md) as the canonical behavior spec.
+3. Ask it to implement the behavior in whatever instruction layer your current tool uses.
 
-```bash
-git clone https://github.com/thecodefeels/skill-learning-modes ~/.claude/skills/learning-modes
+Copy-paste prompt:
+
+```text
+Use https://github.com/thecodefeels/skill-learning-modes as the canonical behavior spec.
+Implement Learning Modes in this workspace using the instruction mechanism that fits this tool best.
+Preserve the trigger boundary, the 8-mode menu, the pacing rules, and the mode behaviors from SKILL.md.
+Do not turn it into a runnable app. Treat it as a portable behavior layer.
 ```
 
-Verify the expected files are present:
+If you want, your agent can also adapt the behavior for one tool without changing the core learning experience:
 
-```bash
-ls ~/.claude/skills/learning-modes
-# Expected: SKILL.md  README.md  LICENSE
-```
-
-### OpenAI Codex
-
-Use [`SKILL.md`](./SKILL.md) as the source text for your repo-level instructions:
-
-1. Open or create `AGENTS.md` in the repo where you want the learning coach available.
-2. Add a `Learning Modes` section and paste or adapt the behavior from [`SKILL.md`](./SKILL.md).
-3. Keep the trigger boundary and 8-mode menu intact so the behavior matches this repo.
-
-### OpenCode
-
-OpenCode setups vary more, so treat [`SKILL.md`](./SKILL.md) as the canonical behavior and port it into the instruction or agent file your setup already uses. If your OpenCode workflow supports named agents or reusable prompts, register it there as `learning-modes`.
+- Claude Code: load [`SKILL.md`](./SKILL.md) directly or port it into a local skill setup.
+- OpenAI Codex: adapt [`SKILL.md`](./SKILL.md) into `AGENTS.md` or the repo instruction layer.
+- OpenCode: port [`SKILL.md`](./SKILL.md) into the agent or instruction file your setup already uses.
 
 ### What should stay consistent
 
@@ -101,6 +95,13 @@ The behavior should stay the same across hosts:
 - same trigger boundaries
 - same pacing and interaction guardrails
 - same mode goals and summaries
+
+### What your agent should not change
+
+- Do not turn the interaction into a long lecture by default.
+- Do not remove the mode chooser.
+- Do not broaden the trigger so far that it hijacks normal task requests.
+- Do not create host-specific variants with different learning behavior unless you intentionally want a fork.
 
 ## First 60 seconds
 
